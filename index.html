@@ -65,6 +65,16 @@
       color: #ff4d6d;
       display: none;
     }
+
+    #photo {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 280px;
+  border-radius: 16px;
+  display: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
   </style>
 </head>
 
@@ -77,15 +87,22 @@
       <button id="no">No 😅</button>
     </div>
 
-    <div id="message">
-      You being my Valentine makes my life Shine ✨❤️
-    </div>
-  </div>
+   <div id="message">
+  You being my Valentine makes my life Shine ✨❤️
+</div>
+
+<img
+  id="photo"
+  src="us.jpg"
+  alt="Us ❤️"
+/>
+
 
 <script>
   const noBtn = document.getElementById("no");
   const yesBtn = document.getElementById("yes");
   const message = document.getElementById("message");
+  const photo = document.getElementById("photo");
   const buttons = document.querySelector(".buttons");
 
   let yesScale = 1;
@@ -117,11 +134,13 @@
     moveNoButton();
   });
 
-  yesBtn.addEventListener("click", () => {
-    message.style.display = "block";
-    noBtn.style.display = "none";
-    yesBtn.style.display = "none";
-  });
+ yesBtn.addEventListener("click", () => {
+  message.style.display = "block";
+  photo.style.display = "block";
+  noBtn.style.display = "none";
+  yesBtn.style.display = "none";
+});
+
 </script>
 
 </body>
