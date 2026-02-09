@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Be My Valentine ❤️</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
@@ -15,55 +16,70 @@
       font-family: Arial, sans-serif;
       overflow: hidden;
     }
+
     .card {
       background: white;
       padding: 40px;
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      max-width: 350px;
     }
+
     h1 {
       color: #ff4d6d;
       margin-bottom: 30px;
     }
+
     .buttons {
       position: relative;
-      height: 120px;
+      height: 140px;
     }
+
     button {
       padding: 12px 26px;
       font-size: 1rem;
       border-radius: 30px;
       border: none;
       cursor: pointer;
+      transition: transform 0.2s ease;
     }
+
     #yes {
       background: #ff4d6d;
       color: white;
+      transform: scale(1);
     }
+
     #no {
       background: #ccc;
       color: #444;
       position: absolute;
-      left: 120px;
+      left: 140px;
       top: 0;
     }
+
     #message {
       margin-top: 25px;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: #ff4d6d;
       display: none;
     }
   </style>
 </head>
+
 <body>
   <div class="card">
-    <h1>Will you be my Valentine? 💖</h1>
+    <h1>Will you be my Valentine, Roshni? 💖</h1>
+
     <div class="buttons">
       <button id="yes">Yes 💘</button>
       <button id="no">No 😅</button>
     </div>
-    <div id="message">YAY ❤️ Best Valentine ever 😘</div>
+
+    <div id="message">
+      You being my Valentine makes my life Shine ✨❤️
+    </div>
   </div>
 
   <script>
@@ -71,16 +87,35 @@
     const yesBtn = document.getElementById("yes");
     const message = document.getElementById("message");
 
-    noBtn.addEventListener("mouseenter", () => {
+    let yesScale = 1;
+
+    function moveNoButton() {
       const maxX = window.innerWidth - noBtn.offsetWidth;
       const maxY = window.innerHeight - noBtn.offsetHeight;
+
       noBtn.style.left = Math.random() * maxX + "px";
       noBtn.style.top = Math.random() * maxY + "px";
+
+      // Grow the YES button each time
+      yesScale += 0.15;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    // Dodge mouse (desktop)
+    noBtn.addEventListener("mouseenter", moveNoButton);
+
+    // Dodge taps (mobile)
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNoButton();
     });
 
     yesBtn.addEventListener("click", () => {
       message.style.display = "block";
+      noBtn.style.display = "none";
+      yesBtn.style.display = "none";
     });
   </script>
 </body>
 </html>
+
