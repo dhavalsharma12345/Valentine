@@ -82,40 +82,48 @@
     </div>
   </div>
 
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const message = document.getElementById("message");
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const message = document.getElementById("message");
+  const buttons = document.querySelector(".buttons");
 
-    let yesScale = 1;
+  let yesScale = 1;
 
-    function moveNoButton() {
-      const maxX = window.innerWidth - noBtn.offsetWidth;
-      const maxY = window.innerHeight - noBtn.offsetHeight;
+  function moveNoButton() {
+    const containerRect = buttons.getBoundingClientRect();
+    const noRect = noBtn.getBoundingClientRect();
 
-      noBtn.style.left = Math.random() * maxX + "px";
-      noBtn.style.top = Math.random() * maxY + "px";
+    const maxX = containerRect.width - noRect.width;
+    const maxY = containerRect.height - noRect.height;
 
-      // Grow the YES button each time
-      yesScale += 0.15;
-      yesBtn.style.transform = `scale(${yesScale})`;
-    }
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
 
-    // Dodge mouse (desktop)
-    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
 
-    // Dodge taps (mobile)
-    noBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      moveNoButton();
-    });
+    // Grow YES button each attempt
+    yesScale += 0.15;
+    yesBtn.style.transform = `scale(${yesScale})`;
+  }
 
-    yesBtn.addEventListener("click", () => {
-      message.style.display = "block";
-      noBtn.style.display = "none";
-      yesBtn.style.display = "none";
-    });
-  </script>
+  // Desktop
+  noBtn.addEventListener("mouseenter", moveNoButton);
+
+  // Mobile
+  noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNoButton();
+  });
+
+  yesBtn.addEventListener("click", () => {
+    message.style.display = "block";
+    noBtn.style.display = "none";
+    yesBtn.style.display = "none";
+  });
+</script>
+
 </body>
 </html>
 
